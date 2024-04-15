@@ -19,8 +19,8 @@ class Solution {
         helper(root , arr , "");
         // System.out.println(arr);
         int ans = 0;
-        for(String st:arr){
-            ans += Integer.parseInt(st);
+        for(int i=0;i<arr.size();i++){
+            ans += Integer.parseInt(arr.get(i));
         }
         return ans;   
     }
