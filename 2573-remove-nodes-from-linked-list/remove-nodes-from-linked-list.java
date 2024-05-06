@@ -10,21 +10,15 @@
  */
 class Solution {
     public ListNode removeNodes(ListNode head) {
-        ListNode temp = head;
-        Stack<ListNode> st = new Stack<>();
-        
-        while(temp!=null){
-            while(!st.isEmpty() && st.peek().val < temp.val) st.pop();
+        if(head==null) return null;
 
-            st.push(temp);
-            temp = temp.next;
-        }
-        ListNode nxt = null;
-        while(!st.isEmpty()){
-            temp = st.pop();
-            temp.next = nxt;
-            nxt = temp;
-        }
-        return temp;
+        ListNode curr = head;
+        ListNode nxtG = removeNodes(head.next);
+
+        curr.next = nxtG;
+
+        if(nxtG==null || curr.val >= nxtG.val) return curr;
+
+        return nxtG;
     }
 }
