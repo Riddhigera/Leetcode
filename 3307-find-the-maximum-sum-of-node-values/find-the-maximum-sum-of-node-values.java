@@ -1,22 +1,20 @@
 class Solution {
     public long maximumValueSum(int[] nums, int k, int[][] edges) {
-        int n = nums.length;
+        int n = nums.length , count=0 , min = Integer.MAX_VALUE;
         long sum = 0;
-        Integer[] arr = new Integer[n];
-
         for(int i=0;i<n;i++){
-            arr[i] = (nums[i] ^ k) - nums[i];
-            sum+=nums[i];
-        }
-        Arrays.sort(arr , (a,b)->{
-            return b-a;
-        });
+            if((nums[i] ^ k) > nums[i]){
+                sum+=(nums[i]^k);
+                count++;
+            }
 
-        for(int i=0;i<n-1;i+=2){
-            if(arr[i]+arr[i+1] < 0) return sum;
-
-            sum+=arr[i]+arr[i+1];
+            else{
+                sum+=nums[i];
+            }
+            min = Math.min(min , Math.abs((nums[i]^k) - nums[i]));
         }
-        return sum;
+        if(count%2==0) return sum;
+
+        return sum-min;
     }
 }
